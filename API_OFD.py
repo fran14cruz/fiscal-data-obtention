@@ -1,8 +1,5 @@
 import json
 import requests
-from receipt import save
-from receipt import get
-import datetime
 
 
 def get_data(FN, FD, FPD):
@@ -13,7 +10,8 @@ def get_data(FN, FD, FPD):
 
         Первый аргумент - фискальный номер,
         Второй аргумент - фискальный документ,
-        Третий аргумент - фискальный признак'''
+        Третий аргумент - фискальный признак
+        '''
 
     session = requests.Session()
 
@@ -44,15 +42,12 @@ def get_data(FN, FD, FPD):
         url = "https://consumer.1-ofd.ru/api/tickets/ticket/" + check
         response = requests.get(url)
         data = json.loads(response.text)
-        # print(data)
-        # print(json.dumps(data, indent=4, sort_keys=True, ensure_ascii=False))
         with open('data.json', 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
 
         save = {}
         save["cash_total_sum"] = int(data["ticket"]["options"]["cashTotalSum"])
         save["date_time"] = (data["ticket"]["options"]["dateTime"])
-        # save["date_time"] = str(datetime.utcfromtimestamp(ts).strftime("%Y-%m-%d %H:%M:%S"))
         save["ecash_total_sum"] = int(data["ticket"]["options"]["ecashTotalSum"])
         save["fiscal_doc_num"] = FD
         save["fiscal_drive_num"] = str(FN)
@@ -75,16 +70,9 @@ def get_data(FN, FD, FPD):
         save["shift_num"] = int(data["ticket"]["options"]["shiftNumber"])
         save["tax_type"] = int(data["ticket"]["options"]["taxationType"])
         save["total_sum"] = int(data["ticket"]["options"]["totalSum"])
-        # save["retail_place_address"] = str(data["ticket"]["options"]["retailPlaceAddress"])
         save["retail_place_address"] = str(data["retailPlaceAddress"])
 
-        # save["address"] = str(data["retailPlaceAddress"])
-        # save["summa"] = str(data["ticket"]["options"]["totalSum"])
-        # ts = int(data["ticket"]["options"]["dateTime"])
-        # save["time"] = str(datetime.utcfromtimestamp(ts).strftime("%d.%m.%Y, %H:%M:%S"))
-
         save["items"] = []
-        #
         j = 0
         if "items" in data["ticket"]:
             for i in data["ticket"]["items"]:
@@ -101,8 +89,3 @@ def get_data(FN, FD, FPD):
         return save
     else:
         print("Чек не найден")
-
-
-# data = get_data(9251440300022625, 4539, 489467779)
-
-# save(data)
