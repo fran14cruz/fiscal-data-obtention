@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Post Receipt</title>
+</head>
+<body>
+    {% block body %}
+    <div class="container">
+        <h3>Receipt</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            фн: <input type="number" name="fiscal_drive_num"><br>
+            фд: <input type="number" name="fiscal_doc_num"><br>
+            фпд: <input type="number" name="fiscal_sign"><br><br>
+            <button type="submit">Submit</button>
+        </form>
+        <form method="post"></form>
+        <h2>{{ text }}</h2>
+    </div>
+    {% endblock %}
+</body>
+</html>
