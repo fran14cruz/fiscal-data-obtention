@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include 
 
-from pages.views import home_view
+from pages.views import (
+    home_view,
+    ReceiptView,
+)
 
 urlpatterns = [
     path('', home_view, name='home'),
+    path('receipt/', ReceiptView.as_view(), name='receipt_request'),
+    path('api/receipt/', include(('receipts.api.urls', 'receipts'), namespace='api-receipts')),
     path('admin/', admin.site.urls),
 ]
