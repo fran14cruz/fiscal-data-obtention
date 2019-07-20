@@ -1,5 +1,5 @@
 # fiscal-data-obtention
-### Colaborators:
+### Contributors:
 * Bulgakov Nikita @nightlyteacups
-* Francisco Cruz
+* Francisco Cruz @fran14cruz
 * Roman Mukhametov @Roman360025
