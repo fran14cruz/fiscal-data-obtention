@@ -22,9 +22,16 @@ class ReceiptPostAPIView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-
         
+        fields = request.data
 
+        f = open("/Users/a1/desktop/practice2019/receipt-rest/test.txt", "a")
+        f.write(str(request.data))
+        f.write(str(type(fields)))
+        f.close()
+
+        if 
+        
         status = True
         response_data = {
             "status": str(status),
