@@ -51,11 +51,12 @@ def get(FN, FD, FPD):
     conn.close()
     cur.close()
 
-    if data:
-        return data
-    else:
-        print('Ошибка. Чек не был получен из БД')
-        return None
+    return data
+    #if data:
+    #    return data
+    #else:
+        #print('Ошибка. Чек не был получен из БД')
+        #return None
 
 
 

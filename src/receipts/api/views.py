@@ -24,18 +24,23 @@ class ReceiptPostAPIView(generics.CreateAPIView):
         headers = self.get_success_headers(serializer.data)
         
         fields = request.data
+        fields_list = list(fields.values())
 
-        f = open("/Users/a1/desktop/practice2019/receipt-rest/test.txt", "a")
-        f.write(str(request.data))
-        f.write(str(type(fields)))
-        f.close()
+        # Check if receipt is in database
+        db_receipt = get(fields_list[0], fields_list[1], fields_list[2])
+        ofd_receipt = {}
+        status = False
+        if not db_receipt:
+            # Check if receipt is in ОФД
+            ofd_receipt = get_data(fields_list[0], fields_list[1], fields_list[2])
+            if ofd_receipt:
+                # Save receipt to database
+                save(ofd_receipt)
+                status = True
 
-        if 
-        
-        status = True
         response_data = {
             "status": str(status),
-            "receipt": serializer.data
+            "receipt": ofd_receipt #serializer.data
         }
         return JsonResponse(response_data, status=201)
 

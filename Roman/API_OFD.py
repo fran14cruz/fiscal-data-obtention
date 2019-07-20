@@ -85,7 +85,8 @@ def get_data(FN, FD, FPD):
                     save["items"][j]['nds18'] = int(i["options"]['nds18'])
                 j += 1
 
-        print("Чек найден")
+        #print("Чек найден")
         return save
-    else:
-        print("Чек не найден")
+    #else:
+        #print("Чек не найден")
+    return False
